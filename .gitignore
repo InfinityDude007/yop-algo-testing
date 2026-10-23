@@ -1,0 +1,10 @@
+# Environments
+.env
+.venv/
+
+# Workspaces
+.claude/
+.vscode/
+
+# MacOS
+.DS_Store
