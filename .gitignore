@@ -8,3 +8,6 @@
 
 # MacOS
 .DS_Store
+
+# YOP data
+data/
