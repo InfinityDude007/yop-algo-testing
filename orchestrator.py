@@ -8,3 +8,7 @@ def main():
 
     # build dict with metadata and embedding_text for each YOP, write into data/documents.json
     build_documents()
+
+
+if __name__ == "__main__":
+    main()
