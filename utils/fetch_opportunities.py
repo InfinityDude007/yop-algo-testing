@@ -82,6 +82,18 @@ def fetch_page(token, page, retries=3):
         try:
             with urllib.request.urlopen(request, timeout=120) as response:
                 result = json.load(response)
+        except urllib.error.HTTPError as error:
+            if error.code in (401, 403):
+                sys.exit(
+                    f"GIS API returned {error.code}: GIS_TOKEN in .env is invalid or expired. "
+                    "Get a fresh token and update .env"
+                )
+            # other 4xx errors won't change on retry
+            if error.code < 500 or attempt == retries:
+                raise
+            print(f"  page {page} failed ({error}), retrying...")
+            time.sleep(2 * attempt)
+            continue
         except (urllib.error.URLError, TimeoutError) as error:
             if attempt == retries:
                 raise
