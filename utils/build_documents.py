@@ -84,6 +84,7 @@ def build_metadata(op, today):
     close_dates = sorted(slot["applications_close_date"] for slot in slots)
 
     return {
+        "title": op.get("title"),
         "programme": op["programme"]["short_name_display"],
         "programme_id": int(op["programme"]["id"]),
         "sub_product": (op.get("sub_product") or {}).get("name"),
