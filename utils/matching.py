@@ -43,6 +43,10 @@ def load_options():
     metadata = [doc["metadata"] for doc in documents]
     return {
         "countries": sorted({m["country"] for m in metadata if m["country"]}),
+        # every nationality any opportunity lists, so the names match the nationalities filter
+        "nationalities": sorted(
+            {n["constant_name"] for op in opportunities for n in op.get("nationalities") or []}
+        ),
         "languages": sorted(
             {lang for m in metadata for lang in m["required_languages"] + m["preferred_languages"]}
         ),
